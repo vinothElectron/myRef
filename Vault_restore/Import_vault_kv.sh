@@ -55,3 +55,13 @@ import(){
         fi
 
 }
+
+if [ -z $secret_engine ];
+then
+        echo "Please enter second parameter==> root path/KV secret engine name (e.g hp2b)"
+else
+        #vault secrets move secret/ $secret_engine/
+        echo "started"
+        import $path $epath
+        echo "Completed"
+fi
