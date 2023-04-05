@@ -1,0 +1,55 @@
+Vault(secret management, Encryption apllication as a service,dynamic aws credentians,Certificate management)
+
+Vault commands
+
+	vault status-->view version , status 
+	vi /etc/vault.d/vault.hcl --> vault configuration file
+	vi /srv/vault/.vault-token --> view vault token
+	vault print token -->view currently used token
+	vault token capabilities tokenValue path --> check permission to path/folder for token
+	vault audit list --detailed --> view audit log files
+	vi /vault/log/vault-audit.log --> view audit log file
+	to Login vault on linux we can use either two methods
+		export VAULT_TOKEN="s.nKChGdmNUO8BzoXUEiyHdP0B"  --> set environment variable
+		vault login --> command to login vault	
+	vault secrets list --> list all secret engine/home folders
+	vault list parameter1 (or) vault kv list parameter1 --> display keys/subfolders under parameter1/folder
+	vault list  pki_engine/certs/ --> list the certificates under pki engine	
+	
+	vault read parameter1/key (or) vault kv get parameter1/key --> display secret value as key-value pair 
+	vault kv get -format json -field data  hp2b/aws/access_key  -->get in josn format
+	vault read  pki_engine/cert/certname --> view certificate
+	
+	vault secrets enable kv --> create new KV engine
+	vault secrets disable kv --> delete kv secret engine
+	
+	vault secrets move secret hp2b --> rename kv or move date
+	
+	vault kv put parameter1/path key=value  --> create or update new secret
+    vault kv delete parameter1/path --> to delete secret
+	vault kv undelete [-version=1] parameter1/path --> to retrieve deleted secret
+	Two vault server Modes
+		dev --> vault server -dev
+		prod --> vault server -config=/etc/vault.d/vault.hcl (1st we have to configure)
+	vault secret enable --> create new secret engine with custom name with type
+	vault secret disable --> it revoke secrets datas. secrect engine physical path data will be delated
+	
+	
+	
+	jq -c  '. | keys' vault_kv_hp2b.json
+	jq -c  '.hp2b."prod-dr" | keys' vault_kv_hp2b.json| tr -d "[]"|sed 's|","|\n|g;s|\"||g' | while read i; do echo "vv=$i"; done
+	jq -c  '.hp2b."prod-dr" | keys[] as $r|"\(.[$r])" ' vault_kv_hp2b.json -->values
+	 r=`jq -c  '.hp2b."prod-dr".auth.dbHost.value | keys[]' vault_kv_hp2b.json 2>&1`-->catch stderr & stdout
+	
+	method 1:
+	   check keys & if we get no error, then add key name to variable& check again
+	   if keys gets failed, retrieve value & put it into vault
+	
+	
+	jq -c  '.hp2b."prod-dr" | to_entries[] |.value' vault_kv_hp2b.json
+	
+	method 2:
+	    check vaules is object or not, if it is object then add key name to variable & check  again for value
+		if value is not object then ,put value into vault
+		
+	vault secrets move secret/ hp2b/  --> move secret engine
