@@ -1,0 +1,16 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] aws_eip.aelb (expand)" [label = "aws_eip.aelb", shape = "box"]
+		"[root] aws_instance.ais (expand)" [label = "aws_instance.ais", shape = "box"]
+		"[root] aws_security_group.asg (expand)" [label = "aws_security_group.asg", shape = "box"]
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"]" [label = "provider[\"registry.terraform.io/hashicorp/aws\"]", shape = "diamond"]
+		"[root] aws_eip.aelb (expand)" -> "[root] aws_instance.ais (expand)"
+		"[root] aws_instance.ais (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] aws_security_group.asg (expand)" -> "[root] aws_eip.aelb (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_security_group.asg (expand)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)"
+	}
+}
+
