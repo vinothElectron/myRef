@@ -1,4 +1,9 @@
-provider "aws" {}
+terraform{
+  required_provider{
+     source="terraform/aws"
+  }
+}
+//provider "aws" {}
 /*
 resource "aws_iam_user" "user" {
   name  = var.users[count.index]
