@@ -1,6 +1,6 @@
 terraform{
   required_providers{
-     source="terraform/aws"
+     source="hashicorp/aws"
   }
 }
 //provider "aws" {}
