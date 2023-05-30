@@ -1,5 +1,5 @@
 terraform{
-  required_provider{
+  required_providers{
      source="terraform/aws"
   }
 }
