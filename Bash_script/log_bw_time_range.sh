@@ -1,10 +1,10 @@
 ########################
 #sample Log:	  
-		#[9/7/23 4:19:34:585 GMT] 000006df HPCatalogEntr I   HP_FETCH_ATTR_VALUE > Executing Query with parameters > is3pp | -26 | [3074457345622263353, 3074457345622263353]
-		#[9/7/23 4:19:34:589 GMT] 000006df HPCatalogEntr I   query to be executedSELECT A.CATENTRY_ID,C.VALUE,A.ATTR_ID FROM CATENTRYATTR A JOIN ATTRVALDESC C ON C.ATTRVAL_ID=A.ATTRVAL_ID WHERE A.ATTR_ID IN (?) AND A.ATTR_ID=C.ATTR_ID AND C.LANGUAGE_ID=? AND A.CATENTRY_ID IN (?,?)
+    #[9/7/23 4:19:34:585 GMT] 000006df HPCatalogEntr I   HP_FETCH_ATTR_VALUE > Executing Query with parameters > is3pp | -26 | 30
+    #[9/7/23 4:19:34:589 GMT] 000006df HPCatalogEntr I   query to be executedSELECT A.CATENTRY_ID,C.VALUE,A.ATTR_ID FROM CATENTRYATTR A JOIN ATTRVALDESC C ON C.ATTRVAL_ID=A.ATTRVAL_ID WHERE A.ATTR_ID IN (?) AND A.ATTR_ID=C.ATTR_ID AND C.LANGUAGE_ID=? AND A.CATENTRY_ID IN (?,?)
 #sample input:
     #startDate: 9/7/23 4:18:00
-		#endDate: 9/7/23 4:19:59
+    #endDate: 9/7/23 4:19:59
 ########################
 #!/bin/bash
 echo "Enter dates in mm/dd/yy HH:MM:SS Timezone, example 9/13/23 10:50:26"
