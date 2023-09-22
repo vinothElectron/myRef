@@ -1,0 +1,14 @@
+import os
+from collections import defaultdict
+print(os.path.abspath(r"C:\Users\dell\Desktop\New\Sample_01.txt"))
+file_path=r"C:\Users\dell\Desktop\New\Sample_01.log"
+
+IP_count=defaultdict(int)
+with open(file_path,'r') as file:
+    for line in file:
+        fields=line.strip().split()
+        if len(fields)>1 and fields[5].lstrip("\"").upper() == "GET":
+            IP_count[fields[0]]+=1;
+
+for k,v in IP_count.items():
+    print(f'{k}, {v}')
